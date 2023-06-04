@@ -1,4 +1,4 @@
-public class firstTry
+public class pc1
 {
     public static void main(String args[])
     {

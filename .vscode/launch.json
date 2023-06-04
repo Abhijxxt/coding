@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Persons",
+            "request": "launch",
+            "mainClass": "Hotel.Persons",
+            "projectName": "coding_480253c8"
+        },
+        {
+            "type": "java",
+            "name": "Revenue",
+            "request": "launch",
+            "mainClass": "Hotel.Revenue",
+            "projectName": "coding_480253c8"
+        },
+        {
+            "type": "java",
+            "name": "git1",
+            "request": "launch",
+            "mainClass": "git1",
+            "projectName": "coding_480253c8"
+        },
+        {
+            "type": "java",
+            "name": "laptop1",
+            "request": "launch",
+            "mainClass": "laptop1",
+            "projectName": "coding_480253c8"
+        },
+        {
+            "type": "java",
+            "name": "pc1",
+            "request": "launch",
+            "mainClass": "pc1",
+            "projectName": "coding_480253c8"
+        }
+    ]
+}

@@ -12,8 +12,8 @@ public class Revenue {
     }
     public void Guest()
     {
-        Hotel.Persons name = new Hotel.Persons();
-        System.out.println(name.name());  
+        Persons x = new Persons();
+        System.out.println("Guest name:" + x.name() );  
         
     }
     public static void main(String args[])

@@ -150,6 +150,35 @@ void GuessGame() {
 
 }
 
+void pointers() {
+    int x = 40;
+    int * px = &x; //pointers refer to a physical memory location on the computer where data is stored
+    printf("\n\nPointer of int x = %d is %p",x,&px); 
+    char name[] = "Abhijeet";
+    printf("\nPointer of string %s is %p",name,&name);
+}
+
+void readFile()
+{
+    printf("File Reader\n");
+    char line[255];
+    FILE * fpointer = fopen("data.txt","r");
+
+    fgets(line, 255, fpointer);// another fgets below will read next line of the file
+    printf("%s", line);
+
+    fclose(fpointer);
+}
+
+void files() {
+    //accessing a file through its physical memory location of where it's stored.
+    FILE * fpointer = fopen("data.txt", "a");//w- over write, a- append, r- only read
+    fprintf(fpointer, "\nHello World.");
+    fclose(fpointer);
+    printf("\nData entered in the file successfully!\n\n");
+    readFile();
+}
+
 int main()
 {
     //Data type and Inputs
@@ -217,6 +246,21 @@ int main()
         GuessGame();
     }
     scanf("%c", &x); //Just to bypass auto input
+
+    //Pointers 
+    pointers();
+
+    //Files
+    printf("\nDo you want to enter Files section?y/n");
+    printf("\n->");
+    char x7;
+    scanf("%c", &x7);
+    if (x7 == 'y' || x7=='Y')
+    {
+        files();
+    }
+    scanf("%c", &x); //Just to bypass auto input
+
 
     return 0;
 }

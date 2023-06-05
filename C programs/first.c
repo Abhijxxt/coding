@@ -129,6 +129,9 @@ void Struct() {
 }
 
 void GuessGame() {
+    /*
+    rand() % (max_number + 1 - minimum_number) + minimum_number
+    For random number in range.*/
     int random = rand();
     printf("%d", random);
     bool flag = false;

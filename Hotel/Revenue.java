@@ -1,7 +1,11 @@
 package Hotel;
 //import Hotel.Persons;
 //import java.util.*;
-
+/*
+ * firstly go to parent dir
+ * then javac Hotel/Revenue.java
+ * then java Hotel.Revenue
+ */
 public class Revenue {
     String Name;
     

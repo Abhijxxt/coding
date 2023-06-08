@@ -9,7 +9,7 @@ package Hotel;
 public class Revenue {
     String Name;
     
-    Revenue()
+    public Revenue()
     {
         Name="";
     }

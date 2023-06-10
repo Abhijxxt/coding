@@ -7,6 +7,9 @@ import java.util.*;
 //driver, rating, teamCOM, tyreWear, WetCond, randomness, analysis
 public class accident {
     Random r = new Random();
+    static ArrayList<Double> analysisWet= new ArrayList<Double>();
+    static ArrayList<Double> analysisDry= new ArrayList<Double>();
+    static int wet = 0; //0 - dry 1 - wet
 
     double rating()
     {
@@ -154,7 +157,7 @@ public class accident {
         // pC > 50% 50% agg
         // pC < 50% 30% agg
         pC = pC/4;
-        System.out.println("Chances of COM: " + pC);
+        System.out.println("Chances of COM: " + pC + "%");
         int COM = 0;
         if (pC >= 90)
         {
@@ -184,7 +187,7 @@ public class accident {
         return COM;
     }
 
-    void analysis(double rating, int tyreWear, int wetCond, double randomness, int teamCOM)
+    double analysis(double rating, int tyreWear, int wetCond, double randomness, int teamCOM)
     {
         int pA = 0; // percent chances of accident
         // wet condition 15-22% is avg dry cond <7% is avg 
@@ -210,12 +213,12 @@ public class accident {
         else if (tyreWear >= 20)
             pA += 10;
         else if (tyreWear > 10)
-            pA += 7.5;
+            pA += 5;
         else 
             pA += 2.5;
 
         if (wetCond == 1)
-            pA = 40;
+            pA = 25;
         else
             pA = 10;
 
@@ -233,14 +236,17 @@ public class accident {
             pA += 5;
 
         if (teamCOM == 1)
-            pA += 25;
+            pA += 20;
         else    
-            pA += 10;
+            pA += 5;
 
-        System.out.println("Chances of accident: " + pA/5);
+        
+        System.out.println("Chances of accident: " + pA/5 + "%"); /*HAVE TO COLORISE THIS */
+
+        return pA/5;
     }
 
-    void driver()
+    double driver()
     {
         System.out.println("DRIVER DETAILS");
         
@@ -252,6 +258,11 @@ public class accident {
         int wetCond = wetCond(); //0-no, 1-yes
         double randomness = randomness(rating,tyreWear,wetCond); // 2.5-4.5 avg on dry 2.5-5 avg on wet 
         
+        if (wetCond == 1)
+            wet = 1;
+        else
+            wet = 0;
+
 
         System.out.println("Name: " + name);
 
@@ -266,18 +277,18 @@ public class accident {
         
         
         if (tyreWear>=70)
-            System.out.println("Tyre Wear: \u001B[31m" + tyreWear + "\u001B[37m");
+            System.out.println("Tyre Wear: \u001B[31m" + tyreWear + "%\u001B[37m");
         else if (tyreWear >= 40)
-            System.out.println("Tyre Wear: \u001B[33m" + tyreWear + "\u001B[37m");
+            System.out.println("Tyre Wear: \u001B[33m" + tyreWear + "%\u001B[37m");
         else if (tyreWear >= 15)
-            System.out.println("Tyre Wear: \u001B[32m" + tyreWear + "\u001B[37m");
+            System.out.println("Tyre Wear: \u001B[32m" + tyreWear + "%\u001B[37m");
         else
-            System.out.println("Tyre Wear: \u001B[35m" + tyreWear + "\u001B[37m");
+            System.out.println("Tyre Wear: \u001B[35m" + tyreWear + "%\u001B[37m");
         
         if (wetCond == 1)
-            System.out.println("Wet Conditions: \u001B[33m" + wetCond + "\u001B[37m");
+            System.out.println("Wet Conditions: \u001B[33m" + "YES" + "\u001B[37m");
         else
-            System.out.println("Wet Conditions: \u001B[32m" + wetCond + "\u001B[37m");
+            System.out.println("Wet Conditions: \u001B[32m" + "NO" + "\u001B[37m");
         
         //System.out.println("Randomness: \u001B[35m" + randomness + "\u001B[37m");
         if (wetCond == 1 && randomness >2.5 && randomness <= 5)
@@ -295,22 +306,138 @@ public class accident {
         
         int teamCOM = teamCOM(rating, tyreWear, wetCond, randomness);//0 - defensive, 1 - aggressive
         if(teamCOM == 1)
-            System.out.println("Team COM:\u001B[33m " + teamCOM+ "\u001B[37m");
+            System.out.println("Team COM:\u001B[33m " + "YES"+ "\u001B[37m");
         else
-            System.out.println("Team COM:\u001B[32m " + teamCOM+ "\u001B[37m");
+            System.out.println("Team COM:\u001B[32m " + "NO"+ "\u001B[37m");
         
-        analysis(rating, tyreWear, wetCond, randomness, teamCOM);
+        return analysis(rating, tyreWear, wetCond, randomness, teamCOM);
 
     }
+
+
+    double mode(double arr[])
+    {
+        int counter = 0;
+        int maxCount = 0;
+        double number = 0;
+        for(int i = 0; i<arr.length; i++)
+        {
+            if(i==0)
+            {
+                counter++;
+                maxCount = counter;
+                number = arr[i];
+            }
+            else if(i!=0 && arr[i] == arr[i-1])
+            {
+                counter++;   
+            }
+            else    
+            {
+                if (counter >= maxCount)
+                {
+                    maxCount = counter;
+                    number = arr[i-1];
+                }
+                counter = 1;
+            }
+        }
+        if (counter >= maxCount)
+        {
+            number = arr[arr.length-1];
+        }    
+        return number;
+    }
+    void probability() 
+    {
+        double sumOfWet = 0, sumOfDry = 0;
+        Collections.sort(analysisDry);
+        Collections.sort(analysisWet);
+
+        double arrOfWet[] = new double[analysisWet.size()];
+        double arrOfDry[] = new double[analysisDry.size()];// arrays for median finding 
+
+
+        System.out.println("\nTotal wet races: " + analysisWet.size());
+        for(int i = 0; i < analysisWet.size(); i++)
+        {
+            //System.out.println(analysisWet.get(i));
+            sumOfWet += analysisWet.get(i);
+            arrOfWet[i] = analysisWet.get(i);
+        }
+
+        System.out.println("Total dry races: " + analysisDry.size());
+        for(int i = 0; i < analysisDry.size(); i++)
+        {
+            //System.out.println(analysisDry.get(i));
+            sumOfDry += analysisDry.get(i);
+            arrOfDry[i] = analysisDry.get(i);
+        }
+        
+        double meanOfWet = sumOfWet / analysisWet.size();
+        double meanOfDry= sumOfDry / analysisDry.size();
+
+        System.out.println("\nMean of chances of accident in wet conditions: " + meanOfWet 
+        + "%\nMean of chances of accident in dry conditions: " + meanOfDry + "%");
+
+        if(analysisWet.size()!=0)
+        {
+            if (analysisWet.size() % 2 != 0) // odd
+            {
+                int medianPOS = (analysisWet.size() + 1) / 2;
+                double medianOfWet = arrOfWet[medianPOS-1];
+                System.out.println("\nMedian of chances of accident in wet conditions: " + medianOfWet + "%");
+            }
+            else
+            {
+                int medianPOS1 = (analysisWet.size() / 2);
+                double medianOfWet = (arrOfWet[medianPOS1-1] + arrOfWet[medianPOS1])/2;
+                System.out.println("\nMedian of chances of accident in wet conditions: " + medianOfWet + "%");
+            }
+        }
+        if(analysisDry.size()!=0)
+        {
+            if(analysisDry.size() % 2 != 0)
+            {
+                int medianPOS = (analysisDry.size() + 1) /2;
+                double medianOfDry = arrOfDry[medianPOS-1];
+                System.out.println("Median of chances of accident in dry conditions: " + medianOfDry + "%");
+            }
+            else
+            {
+                int medianPOS1 = (analysisDry.size() / 2);
+                double medianOfDry = (arrOfDry[medianPOS1-1] + arrOfDry[medianPOS1])/2;
+                System.out.println("Median of chances of accident in dry conditions: " + medianOfDry + "%");
+            }
+        }
+        //MODE FINDER 
+        double modeOfWet = mode(arrOfWet);
+        double modeOfDry = mode(arrOfDry);
+
+        System.out.println("\nMode of chances of accident in wet conditions: " + modeOfWet + 
+        "%\nMode of chances of accident in dry conditions: " + modeOfDry + "%");
+
+    }
+
     public static void main(String[] args) {
         System.out.println("\u001B[36mWe are going to check what driver get's more accident's happen with this program!\u001B[37m");
         
         accident a = new accident();
         for(int i = 1; i <= 100; i++)
         {
-            System.out.println("\n\n"+i);
-            a.driver();
-        }
+            System.out.print("\n\n"+i + ") ");
+            double chanceOfAccident = a.driver();
+            //System.out.println("Chance of accident: " + chanceOfAccident);
+            //System.out.println("Wet Cond: " + wet);
 
+            if (wet == 1)
+                analysisWet.add(chanceOfAccident);
+            else
+                analysisDry.add(chanceOfAccident);
+
+        }
+        System.out.println("\n\n\u001b[34mANALYSIS OF THE CHANCE OF ACCIDENT\u001b[m");
+        a.probability();
+        
     }
 }

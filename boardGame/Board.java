@@ -74,7 +74,7 @@ public class Board {
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
         boolean flag = false;
-        int sum = 0;
+        //int sum = 0;
 
         Board g = new Board();
         g.boardPrint(0);
@@ -91,6 +91,7 @@ public class Board {
 
             
         }
+        sc.close();
         System.out.println("GAME EXITTED");
     }
 }

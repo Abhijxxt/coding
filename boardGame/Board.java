@@ -15,6 +15,7 @@ public class Board {
                           
     int dice[] = {1,2,3,4,5,6};
     int pos= 0;
+    
     void clearBoard()
     {
         for(int i =0; i<board.length;i++)
@@ -80,33 +81,39 @@ public class Board {
             }//MAIN PRINTING ENDS
 
     }
-    public static void main(String[] args) {
-        System.out.println("\033[H\033[2J");
-        Scanner sc = new Scanner(System.in);
-        Random r = new Random();
-        boolean flag = false;
-        //int sum = 0;
+    public static void main(String[] args) throws Exception {
+        try{
+            System.out.println("\033[H\033[2J");
+            Scanner sc = new Scanner(System.in);
+            Random r = new Random();
+            boolean flag = false;
+            //int sum = 0;
 
-        Board g = new Board();
-        System.out.println("\nPress Enter to roll again or type N/n to exit: ");
-        g.boardPrint(0);
-        while(!flag)
-        {
-            
-            String x = sc.nextLine();
-            if(x.toLowerCase().equals("n"))
-                break;
-            if(x.isEmpty())
+            Board g = new Board();
+            System.out.println("\nPress Enter to roll again or type N/n to exit: ");
+            g.boardPrint(0);
+            while(!flag)
             {
-                int roll = g.dice[r.nextInt(g.dice.length)];
-                System.out.println("\033[H\033[2J");
-                System.out.println("You rolled: " + roll + "\n");
-                g.boardPrint(roll);
-            }
+                
+                String x = sc.nextLine();
+                if(x.toLowerCase().equals("n"))
+                    break;
+                if(x.isEmpty())
+                {
+                    int roll = g.dice[r.nextInt(g.dice.length)];
+                    System.out.println("\033[H\033[2J");
+                    System.out.println("You rolled: " + roll + "\n");
+                    g.boardPrint(roll);
+                }
 
-            
+                
+            }
+            sc.close();
+            System.out.println("GAME EXITTED");
         }
-        sc.close();
-        System.out.println("GAME EXITTED");
+        catch(Exception e)
+        {
+            System.out.println("Quitted!");
+        }
     }
 }

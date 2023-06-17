@@ -88,18 +88,21 @@ public class Board {
         //int sum = 0;
 
         Board g = new Board();
+        System.out.println("\nPress Enter to roll again or type N/n to exit: ");
         g.boardPrint(0);
         while(!flag)
         {
-            System.out.print("\nRoll again Y/N: ");
-            String x = sc.next();
+            
+            String x = sc.nextLine();
             if(x.toLowerCase().equals("n"))
                 break;
-            
-            int roll = g.dice[r.nextInt(g.dice.length)];
-            System.out.println("\033[H\033[2J");
-            System.out.println("You rolled: " + roll + "\n");
-            g.boardPrint(roll);
+            if(x.isEmpty())
+            {
+                int roll = g.dice[r.nextInt(g.dice.length)];
+                System.out.println("\033[H\033[2J");
+                System.out.println("You rolled: " + roll + "\n");
+                g.boardPrint(roll);
+            }
 
             
         }

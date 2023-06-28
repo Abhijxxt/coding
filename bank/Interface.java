@@ -4,7 +4,7 @@ public class Interface {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("<Welcome to R Bank>");
-        System.out.println("1. Card info or transaction,\n2. Net banking \n 3. Person to Person money transfer \n");
+        System.out.println("1. Card info or transaction,\n2. Net banking \n3. Person to Person money transfer \n");
 
         int opt = sc.nextInt();
     

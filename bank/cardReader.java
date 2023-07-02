@@ -19,11 +19,13 @@ public class cardReader {
             long acc_check = Long.parseLong(st.nextToken());
             if(acc_check == account_number)
                 break;
+            else
+                data = "";
         }
 
         if(data.equals(""))
         {
-            System.out.println("No data found!");
+            System.out.println("No account found!");
         }
         else
         {
@@ -69,8 +71,9 @@ public class cardReader {
 
         
     }
-    public static void main(String[] args) throws Exception
+    public void main() throws Exception
     {
+        System.out.print("\033[H\033[2J");  
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Enter your card then press enter: ");
@@ -82,11 +85,11 @@ public class cardReader {
             Thread.sleep(3000);
             try
             {
-                System.out.println("Card found. Please wait");
+                
                 File file = new File("E:\\id.txt");
                 Scanner read = new Scanner(file);
                 String data = read.nextLine().trim();
-                
+                System.out.println("Card found. Please wait");
                 cardReader cr = new cardReader();
                 cr.dataRetrieve(data);
                 

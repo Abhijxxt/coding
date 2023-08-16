@@ -64,7 +64,7 @@ public class cardReader {
     void dataRetrieve(String data) throws FileNotFoundException
     {
         StringTokenizer card_data_array = new StringTokenizer(data, ",");
-        String name = card_data_array.nextToken();
+        //String name = card_data_array.nextToken();
         long account_number = Long.parseLong(card_data_array.nextToken());
 
         databaseRetrieve(account_number);

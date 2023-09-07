@@ -7,9 +7,11 @@ int main()
     do{
         ch = fgetc(pseudocodeFile);
         printf("%c", ch);
- 
-        // Checking if character is not EOF.
-        // If it is EOF stop reading.
+
+        if(ch == '\n')
+        {
+            printf("new line");
+        }
     } while (ch != EOF);
     
     fclose(pseudocodeFile);

@@ -1,2 +1,6 @@
-git init
-git remote add origin <link for your github repository>
+git init #initializing local folder for accessing github repo that will come next
+git remote add origin <link for your github repository> #linking to certain repo on your github account
+git add . #Saves all file to staging git add <filename>
+git status #tells what files are in local repo which are changed which are in staging phase 
+git commit -m "message" #commits the files changed to local repo (still not transferred to remote repo)
+git push origin main #pushes the files to remote repo on default branch

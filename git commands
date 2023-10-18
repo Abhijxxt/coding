@@ -1,0 +1,16 @@
+git init #initializing local folder for accessing github repo that will come next
+git remote add origin <link for your github repository> #linking to certain repo on your github account
+git add . #Saves all file to staging git add <filename>
+git status #tells what files are in local repo which are changed which are in staging phase 
+git commit -m "message" #commits the files changed to local repo (still not transferred to remote repo)
+git push origin main #pushes the files to remote repo on default branch
+
+before working on open source or someone else's repository first youll have to fork it to your own github account
+then you can clone it to local repo then work on it and add, commit, push to staging, local repo, remote repo(own)
+Now you have to send it from your own forked repo to the main their account repository so you'll do pull request.
+
+git init is always used.
+git clone <url> #to clone the files of remote repo to local repo
+
+git fetch # fetches the changes in a certain file on which more than one person are working on
+git pull # pulls the changes from remote repo and directly changes them to local repo

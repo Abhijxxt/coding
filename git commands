@@ -14,3 +14,8 @@ git clone <url> #to clone the files of remote repo to local repo
 
 git fetch # fetches the changes in a certain file on which more than one person are working on
 git pull # pulls the changes from remote repo and directly changes them to local repo
+
+git checkout dev #  to change working branch
+git checkout -b "dev" # to create dev branch
+git merge dev # to merge it into dev branch 
+git checkout -D dev # to delete a branch
